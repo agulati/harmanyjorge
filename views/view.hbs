@@ -64,8 +64,12 @@
             var captionFile = 'captions/' + pages[page-2].replace(/\.[^/.]+$/, "") + '.txt'
             $(element.children().children('.caption')[0]).load(captionFile)
             $(element.children().children('img')[0]).on('click', function () {
+              $('#overlay').html('<img class="main-image" src="img/' + pages[page-2] + '"/>')
+              $('#overlay').fadeIn('slow')
               $('#overlay').removeClass("hide")
-              $('#overlay').load('/download?uploads/' + pages[page-2])
+              $('img.main-image').on('click', function () {
+                $('#overlay').fadeOut('fast')
+              })
             })
           }
         }
@@ -109,6 +113,8 @@
             $('#book').turn('previous');
           else if (e.keyCode==39)
             $('#book').turn('next');
+          else if (e.which == 27)
+            $('#overlay').fadeOut('fast')
 
       });
 

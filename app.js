@@ -79,6 +79,7 @@ function saveFile (caption, files, done) {
     var extension = path.extname(fileName)
     var newPath = 'uploads/' + name + extension
     var thumbPath = 'public/img/thumbs/' + name + extension
+    var largePath = 'public/img/' + name + extension
     var captionPath = 'public/captions/' + name + '.txt'
     fs.writeFile(newPath, data, function (err2) {
       if (err2) return console.log(err2)
@@ -93,14 +94,22 @@ function saveFile (caption, files, done) {
           height: 200
         }, function (err3, pathToThumb) {
           if (err3) return done(err3)
-          fs.writeFile(captionPath, text, function (err4) {
+          qt.convert({
+            src: newPath,
+            dst: largePath,
+            width: 800,
+            type: 'resize'
+          }, function (err4, pathToThumb2) {
             if (err4) return done(err4)
-            done(null, index);
+            fs.writeFile(captionPath, text, function (err5) {
+              if (err5) return done(err5)
+              done(null, index);
+            })
           })
         })
       } else {
-        fs.writeFile(captionPath, text, function (err5) {
-          if (err5) return done(err5)
+        fs.writeFile(captionPath, text, function (err6) {
+          if (err5) return done(err6)
           done(null, index);
         })
       }

@@ -1,0 +1,103 @@
+@font-face
+  font-family 'LaBelle'
+  src url('/fonts/LaBelleAurore.ttf') format('truetype')
+  font-weight normal
+  font-style normal
+
+color-white = #fff
+color-light-gray = #ccc
+color-red = #F7977A
+color-red-orange  = #F9AD81
+color-yellow-orange = #FDC68A
+color-yellow = #FFF79A
+color-pea-green = #C4DF9B
+color-yellow-green = #A2D39C
+color-green = #82CA9D
+color-green-cyan = #7BCDC8
+color-cyan = #6ECFF6
+color-cyan-blue = #7EA7D8
+color-blue = #8493CA
+color-blue-violet = #8882BE
+color-violet = #A187BE
+color-violet-magenta = #BC8DBF
+color-magenta = #F49AC2
+color-magenta-red = #F6989D
+
+body
+  margin 0
+  background-color #000
+  color color-light-gray
+  font-family Cambria
+
+h1
+  margin-bottom 20px
+
+.main
+  width 60%
+  margin auto
+  text-align center
+  padding-bottom 50px
+
+  &.view
+    width 80%
+
+.green-cyan
+  color color-green-cyan
+
+.cyan-blue
+  color color-cyan-blue
+
+.button-green-cyan
+  background-color color-green-cyan
+  border-color color-green-cyan
+
+.buttons
+  margin-top 65px
+
+.btn-disabled
+  background-color #666
+  border-color #333
+  cursor default
+  &:hover
+    background-color #666
+    color #ccc
+
+form
+  text-align left
+
+.file-input
+  margin-top 75px
+  margin-bottom 20px
+
+ul
+  list-style none
+  padding-left 0
+  display none
+
+li
+  padding 5px
+
+textarea
+  font-size 16px
+  padding 5px
+  line-height 24px
+  width 500px
+
+span[class*='delete_']
+  display inline-block
+  padding-right 15px
+  font-size 12px
+  cursor pointer
+
+#book
+
+  .cover
+    background-color #fff
+
+    h1
+      font-family LaBelle
+      line-height 150px
+      color color-red
+
+  .data
+    line-height 350px

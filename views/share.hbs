@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Harman y Jorge | Recuerdos / Memories</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="main">
+        <h1>
+          Share / para Compartir
+        </h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="file-input">
+            <input type="file" class="filestyle" data-classButton="btn btn-primary" multiple="multiple" name="files" data-buttonText="Select files / Seleccionar Archivo" data-input="false">
+          </div>
+          <ul class="file-list lead cyan-blue"></ul>
+          <div class="buttons row">
+            <div class="col-xs-6 text-left"><a class="btn btn-primary" href="/">Back / Previo</a></div>
+            <div class="col-xs-6 text-right"><input type="submit" class="btn btn-primary" value="Submit / Continuar"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap-filestyle.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+
+      var savedFiles = []
+
+      function deleteFile (e) {
+        var files = $('input[type="file"]')[0].files
+        var indexToDelete = e.target.className.replace('delete_','')
+        var caption = $('textarea[name="captions[' + indexToDelete + ']"]')
+        caption.parent().slideUp()
+
+        savedFiles.splice(indexToDelete,1)
+      }
+
+      $('label').on('click', function (e) {
+        var label = $('label')
+        if ( label.hasClass('btn-disabled') ) {
+          e.preventDefault()
+        }
+      })
+
+      $('input[type="file"]').on('change', function () {
+        var fileList = this.files
+        var listEle = $('ul.file-list')
+        for (var i=0; i < fileList.length; i++) {
+          var li = $('<li/>')
+          var caption = $('<textarea rows="3" class="caption" name="captions[' + i + ']" placeholder="Enter caption / Ponga identidad"/>')
+          var div = $('<div/>')
+          div.html(fileList[i].name)
+          var span = $('<span class="delete_' + i + '"/>')
+          div.prepend(span)
+          span.html('[ delete / eliminar ]')
+          li.append(div)
+          li.append(caption)
+          listEle.append(li)
+          span.on('click', deleteFile)
+          savedFiles.push(fileList[i])
+        }
+        listEle.slideDown(1000)
+      })
+
+      $('form').on('submit', function (e) {
+        e.preventDefault()
+        $('li').each(function (i, ele) {
+          savedFiles[i].caption = ele.childNodes[1].value
+        })
+
+        for (var i=0; i < savedFiles.length; i++) {
+          $.ajax({
+            url : '/upload',
+            data : function () {
+              var data = new FormData()
+                data.append('file_' + i, savedFiles[i])
+                data.append('caption_' + i, $('[name="captions[' + i + ']"]').val())
+              return data
+            }(),
+            type : 'POST',
+            contentType : false,
+            processData : false
+          }).always(function (data) {
+            console.log(data)
+            $('.delete_' + i).html('DONE')
+            $('.delete_' + i).removeClass('.delete_' + i)
+          })
+        }
+      })
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "photos.harmanyjorge.com",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "author": "Amit Gulati",
+  "dependencies": {
+    "express": "~3.2.6",
+    "moment": "~2.4.0",
+    "async": "~0.2.10",
+    "underscore": "~1.4.4",
+    "mongodb": "~1.2.14",
+    "stylus": "~0.40.3",
+    "quickthumb": "0.0.8"
+  }
+}

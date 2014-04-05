@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'LaBelle';
+  src: url("/fonts/LaBelleAurore.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  background-color: #000;
+  color: #ccc;
+  font-family: Cambria;
+}
+h1 {
+  margin-bottom: 20px;
+}
+.main {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  padding-bottom: 50px;
+}
+.main.view {
+  width: 80%;
+}
+.green-cyan {
+  color: #7bcdc8;
+}
+.cyan-blue {
+  color: #7ea7d8;
+}
+.button-green-cyan {
+  background-color: #7bcdc8;
+  border-color: #7bcdc8;
+}
+.buttons {
+  margin-top: 65px;
+}
+.btn-disabled {
+  background-color: #666;
+  border-color: #333;
+  cursor: default;
+}
+.btn-disabled:hover {
+  background-color: #666;
+  color: #ccc;
+}
+form {
+  text-align: left;
+}
+.file-input {
+  margin-top: 75px;
+  margin-bottom: 20px;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+  display: none;
+}
+li {
+  padding: 5px;
+}
+textarea {
+  font-size: 16px;
+  padding: 5px;
+  line-height: 24px;
+  width: 500px;
+}
+span[class*='delete_'] {
+  display: inline-block;
+  padding-right: 15px;
+  font-size: 12px;
+  cursor: pointer;
+}
+#book .cover {
+  background-color: #fff;
+}
+#book .cover h1 {
+  font-family: LaBelle;
+  line-height: 150px;
+  color: #f7977a;
+}
+#book .data {
+  line-height: 350px;
+}

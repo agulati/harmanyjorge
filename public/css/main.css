@@ -138,9 +138,14 @@ div.caption {
   position: fixed;
   top: 0;
   left: 0;
-  padding: 50px;
+  padding: 50px 0;
 }
-#overlay img {
+#overlay #overlay-image {
+  width: 800px;
+  margin: auto;
+  overflow-x: scroll;
+}
+#overlay #overlay-image img {
   display: block;
   margin: auto;
   cursor: pointer;

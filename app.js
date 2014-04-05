@@ -97,7 +97,7 @@ function saveFile (caption, files, done) {
           qt.convert({
             src: newPath,
             dst: largePath,
-            width: 800,
+            height: 600,
             type: 'resize'
           }, function (err4, pathToThumb2) {
             if (err4) return done(err4)

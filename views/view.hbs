@@ -17,7 +17,10 @@
   </head>
 
   <body>
-    <div id="overlay" class="hide"></div>
+    <div id="overlay" class="hide">
+      <div id="overlay-image">
+      </div>
+    </div>
     <div class="container">
       <div class="main view">
         <h1>View / para Ver</h1>
@@ -64,7 +67,7 @@
             var captionFile = 'captions/' + pages[page-2].replace(/\.[^/.]+$/, "") + '.txt'
             $(element.children().children('.caption')[0]).load(captionFile)
             $(element.children().children('img')[0]).on('click', function () {
-              $('#overlay').html('<img class="main-image" src="img/' + pages[page-2] + '"/>')
+              $('#overlay-image').html('<img class="main-image" src="img/' + pages[page-2] + '"/>')
               $('#overlay').fadeIn('slow')
               $('#overlay').removeClass("hide")
               $('img.main-image').on('click', function () {

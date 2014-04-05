@@ -24,11 +24,15 @@
         <form action="/upload" method="post" enctype="multipart/form-data">
           <div class="file-input">
             <input type="file" class="filestyle" data-classButton="btn btn-primary" multiple="multiple" name="files" data-buttonText="Select files / Seleccionar Archivo" data-input="false">
+            <a class="btn btn-primary hide" href="/view">View / para Ver</a>
           </div>
-          <ul class="file-list lead cyan-blue"></ul>
+          <ul class="file-list green-cyan"></ul>
           <div class="buttons row">
-            <div class="col-xs-6 text-left"><a class="btn btn-primary" href="/">Back / Previo</a></div>
-            <div class="col-xs-6 text-right"><input type="submit" class="btn btn-primary" value="Submit / Continuar"></div>
+            <div class="col-xs-6 text-left"><a class="btn btn-primary" href="/">Home / Inicio</a></div>
+            <div class="col-xs-6 text-right">
+              <input type="submit" class="btn btn-primary on" value="Submit / Continuar">
+              <a class="btn btn-primary hide" href="/view">View / para Ver</a>
+            </div>
           </div>
         </form>
       </div>
@@ -64,10 +68,10 @@
         var listEle = $('ul.file-list')
         for (var i=0; i < fileList.length; i++) {
           var li = $('<li/>')
-          var caption = $('<textarea rows="3" class="caption" name="captions[' + i + ']" placeholder="Enter caption / Ponga identidad"/>')
+          var caption = $('<textarea rows="2" class="caption" name="captions[' + i + ']" placeholder="Enter caption / Ponga identidad"/>')
           var div = $('<div/>')
           div.html(fileList[i].name)
-          var span = $('<span class="delete_' + i + '"/>')
+          var span = $('<span class="delete-button delete_' + i + '"/>')
           div.prepend(span)
           span.html('[ delete / eliminar ]')
           li.append(div)
@@ -76,7 +80,7 @@
           span.on('click', deleteFile)
           savedFiles.push(fileList[i])
         }
-        listEle.slideDown(1000)
+        listEle.slideDown()
       })
 
       $('form').on('submit', function (e) {
@@ -84,12 +88,17 @@
         $('li').each(function (i, ele) {
           savedFiles[i].caption = ele.childNodes[1].value
         })
+        $('.hide').removeClass('hide')
+        $('.bootstrap-filestyle').addClass('hide')
+        $('.on').addClass('hide')
 
         for (var i=0; i < savedFiles.length; i++) {
+          $('.delete_' + i).html('<img src="img/loader.gif"/>')
           $.ajax({
             url : '/upload',
             data : function () {
               var data = new FormData()
+                data.append('index_' + i, i)
                 data.append('file_' + i, savedFiles[i])
                 data.append('caption_' + i, $('[name="captions[' + i + ']"]').val())
               return data
@@ -98,9 +107,13 @@
             contentType : false,
             processData : false
           }).always(function (data) {
-            console.log(data)
-            $('.delete_' + i).html('DONE')
-            $('.delete_' + i).removeClass('.delete_' + i)
+            var deleteEle = $('.delete_' + data.index)
+            deleteEle.html('DONE')
+            deleteEle.removeClass('delete_' + data.index)
+            deleteEle.css('cursor', 'default')
+            var textbox = $(deleteEle.parent().parent().children().last()[0])
+            textbox.prop('disabled', true)
+            textbox.addClass('disabled')
           })
         }
       })

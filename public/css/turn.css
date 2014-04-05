@@ -1,6 +1,6 @@
 #book{
     width:800px;
-    height:500px;
+    height:400px;
 }
 
 #book .turn-page{
@@ -34,17 +34,6 @@
     font-size:40px;
     color:#999;
     line-height:500px;
-}
-
-#controls{
-    width:800px;
-    text-align:center;
-    margin:20px 0px;
-    font:30px arial;
-}
-
-#controls input, #controls label{
-    font:30px arial;
 }
 
 #book .odd{

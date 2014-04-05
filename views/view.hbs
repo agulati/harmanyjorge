@@ -17,6 +17,7 @@
   </head>
 
   <body>
+    <div id="overlay" class="hide"></div>
     <div class="container">
       <div class="main view">
         <h1>View / para Ver</h1>
@@ -24,9 +25,13 @@
           <div class="cover"><h1>Harman<br/>Y<br/>Jorge</h1></div>
         </div>
 
-        <div id="controls">
-          <label for="page-number">Page:</label>
-          <input type="text" size="3" id="page-number"> of <span id="number-pages"></span>
+        <div class="buttons row">
+          <div class="col-xs-4 text-left"><a class="btn btn-primary" href="/">Home / Inicio</a></div>
+          <div id="controls" class="text-center col-xs-4">
+            <label for="page-number">Page:</label>
+            <input type="text" size="3" id="page-number"> of <span id="number-pages"></span>
+          </div>
+          <div class="col-xs-4 text-right"><a class="btn btn-primary" href="/share">Share / para Compartir</a></div>
         </div>
       </div>
     </div>
@@ -54,11 +59,15 @@
           var element = $('<div />', {'class': 'page '+((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page}).html('<i class="loader"></i>');
           // If not then add the page
           book.turn('addPage', element, page);
-          // Let's assum that the data is comming from the server and the request takes 1s.
-          setTimeout(function(){
-              if (page > 1)
-                element.html('<div class="data"><img src="img/thumbs/' + pages[page-2] + '"/></div>');
-          }, 1000);
+          if (page > 1) {
+            element.html('<div class="data"><img src="img/thumbs/' + pages[page-2] + '"/><div class="caption"></div></div>');
+            var captionFile = 'captions/' + pages[page-2].replace(/\.[^/.]+$/, "") + '.txt'
+            $(element.children().children('.caption')[0]).load(captionFile)
+            $(element.children().children('img')[0]).on('click', function () {
+              $('#overlay').removeClass("hide")
+              $('#overlay').load('/download?uploads/' + pages[page-2])
+            })
+          }
         }
       }
 

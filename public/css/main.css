@@ -6,12 +6,24 @@
 }
 body {
   margin: 0;
-  background-color: #000;
-  color: #ccc;
-  font-family: Cambria;
+  background-color: #fff;
+  color: #f7977a;
+  font-family: LaBelle;
 }
 h1 {
   margin-bottom: 20px;
+  font-family: LaBelle !important;
+  font-size: 50px;
+}
+.hide {
+  display: none;
+}
+.lead {
+  font-size: 30px;
+}
+.btn {
+  font-size: 18px;
+  font-family: Cambria;
 }
 .main {
   width: 60%;
@@ -33,7 +45,9 @@ h1 {
   border-color: #7bcdc8;
 }
 .buttons {
-  margin-top: 65px;
+  border-top: 1px solid #ccc;
+  margin-top: 15px;
+  padding-top: 15px;
 }
 .btn-disabled {
   background-color: #666;
@@ -55,30 +69,72 @@ ul {
   list-style: none;
   padding-left: 0;
   display: none;
+  font-family: Cambria;
+  font-size: 24px;
 }
 li {
   padding: 5px;
 }
 textarea {
+  color: #a187be;
   font-size: 16px;
   padding: 5px;
   line-height: 24px;
-  width: 500px;
+  width: 100%;
 }
-span[class*='delete_'] {
+textarea.disabled {
+  background-color: #eee;
+}
+span.delete-button {
   display: inline-block;
   padding-right: 15px;
   font-size: 12px;
   cursor: pointer;
 }
+span.delete-button img {
+  padding-bottom: 10px;
+}
+#book {
+  box-shadow: 2px 2px 5px #999;
+  margin: auto;
+}
 #book .cover {
-  background-color: #fff;
+  background-color: #f8f8f8;
+  border-left: 1px solid #888;
 }
 #book .cover h1 {
+  font-weight: bold;
   font-family: LaBelle;
-  line-height: 150px;
+  line-height: 125px;
   color: #f7977a;
 }
 #book .data {
-  line-height: 350px;
+  line-height: 250px;
+}
+#book .data img {
+  cursor: pointer;
+}
+#controls {
+  font-size: 30px;
+}
+#controls input {
+  color: #a187be;
+  padding-left: 15px;
+}
+div.caption {
+  line-height: 25px;
+  font-size: 22px;
+  width: 350px;
+  text-align: left;
+  padding-left: 75px;
+  overflow-y: scroll;
+  height: 125px;
+}
+#overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  opacity: 0.8;
+  background-color: #fff;
+  position: absolute;
 }

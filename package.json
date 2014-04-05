@@ -11,6 +11,9 @@
     "underscore": "~1.4.4",
     "mongodb": "~1.2.14",
     "stylus": "~0.40.3",
-    "quickthumb": "0.0.8"
+    "quickthumb": "0.0.8",
+    "hbs": "~2.5.0",
+    "node-uuid": "~1.4.1",
+    "mime": "~1.2.11"
   }
 }

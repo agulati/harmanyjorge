@@ -20,26 +20,22 @@ app.configure( function () {
   app.use(express.favicon('./public/img/favicon.ico'))
 })
 
-var authenticate = express.basicAuth( function (user, pass, done) {
-  done(null, pass === 'mardelplata')
-})
-
-app.get('/', authenticate, function (req, res) {
+app.get('/', function (req, res) {
   res.render('index')
 })
 
-app.get('/upload', authenticate, function (req, res) {
+app.get('/upload', function (req, res) {
   res.render('upload')
 })
 
-app.post('/upload', authenticate, express.bodyParser(), function (req, res) {
+app.post('/upload', express.bodyParser(), function (req, res) {
   saveFile(req.body, req.files, function (err, result) {
     if (err) return res.json(err, 422)
     res.json({index : result})
   })
 })
 
-app.get('/download', authenticate, express.bodyParser(), function (req, res) {
+app.get('/download', express.bodyParser(), function (req, res) {
   var file = _.keys(req.query)[0]
   fs.readFile(file, function(error, content) {
     if (error) {

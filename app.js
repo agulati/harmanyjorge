@@ -7,6 +7,7 @@ var http = require('http')
   , uuid = require('node-uuid')
   , mime = require('mime')
   , path = require('path')
+  , moment = require('moment')
 
 var app = express()
 
@@ -27,14 +28,8 @@ app.get('/', authenticate, function (req, res) {
   res.render('index')
 })
 
-app.get('/view', authenticate, function (req, res) {
-  getThumbnails(function (err, result) {
-    res.render('view', { thumbs : result })
-  })
-})
-
-app.get('/share', authenticate, function (req, res) {
-  res.render('share')
+app.get('/upload', authenticate, function (req, res) {
+  res.render('upload')
 })
 
 app.post('/upload', authenticate, express.bodyParser(), function (req, res) {
@@ -109,7 +104,7 @@ function saveFile (caption, files, done) {
         })
       } else {
         fs.writeFile(captionPath, text, function (err6) {
-          if (err5) return done(err6)
+          if (err6) return done(err6)
           done(null, index);
         })
       }
